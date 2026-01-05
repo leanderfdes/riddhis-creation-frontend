@@ -1,28 +1,57 @@
-// Global site settings (singleton)
+// ================================
+// Global Site Settings (SINGLETON)
+// ================================
 export const siteSettingsQuery = `
-  *[_type=="siteSettings" && _id=="siteSettings"][0]{
+  *[_type == "siteSettings" && _id == "siteSettings"][0]{
     brandName,
     tagline,
-    whatsappNumber
+    whatsappNumber,
+    seoTitle,
+    seoDescription,
+    seoImage
   }
 `;
 
-// About section (single visible document)
+
+// ================================
+// About Section (SINGLETON)
+// ================================
 export const aboutSectionQuery = `
-  *[_type=="aboutSection" && visible==true][0]{
+  *[_type == "aboutSection" && _id == "aboutSection"][0]{
     title,
     content,
     "image": image.asset->url
   }
 `;
 
+
+// ================================
+// Collections (LIST)
+// ================================
 export const collectionsQuery = `
-  *[_type=="collection" && visible==true] | order(order asc){
+  *[_type == "collection" && visible == true]
+  | order(order asc){
     _id,
     title,
     category,
     description,
     customNote,
     "images": images[].asset->url
+  }
+`;
+
+
+// ================================
+// Recent Orders / Work Done (LIST)
+// ================================
+export const recentOrdersQuery = `
+  *[_type == "recentOrder" && visible == true]
+  | order(orderDate desc){
+    _id,
+    title,
+    caption,
+    location,
+    orderDate,
+    "image": image.asset->url
   }
 `;
