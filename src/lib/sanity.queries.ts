@@ -17,7 +17,8 @@ export const siteSettingsQuery = `
 // About Section (SINGLETON)
 // ================================
 export const aboutSectionQuery = `
-  *[_type == "aboutSection" && _id == "aboutSection"][0]{
+  *[_type == "aboutSection"]
+  | order(_updatedAt desc)[0]{
     title,
     content,
     "image": image.asset->url
